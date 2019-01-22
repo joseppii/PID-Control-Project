@@ -1,5 +1,25 @@
 # CarND-Controls-PID
-Self-Driving Car Engineer Nanodegree Program
+The goal of this project is to implement a PID controller in C++ to maneuver the vehicle around a track. This is the same lake race track used in the Behavioral Cloning Project.
+
+##PID Controller
+
+The Proportional Integral Derivative (PID) controller is a function that applies a correction to a calculated error value computed by finding the difference between a set value and a measured process. In this project the error is the distance between a reference trajectory and the actual car trajectory. This is called the cross track error (CTE). The controller function contains three terms, P, I and D. The output of the controller in this project is the steering angle.
+
+### Proportional gain (P)
+This term produces an output that is proportional the the current error value i.e. the cross track error. It is calculated by multipling the error by a constant value. Higher P values tend to distabilize the system, while smaller values lead to a less responsive controller.
+
+### Integral gain (I)
+This term is proportional to the magnitude and the duration of the error. It is the sum of the instantaneous error over time and compensates for any offset that is present in the system. It is calculated by multiplying the accumulated error with the integral gain (I).
+
+### Derivative gain (D)
+This term is used to improve the stability of the system by compensating the effects of the propoportinal gain. It is calculated by multipling the derivative gain with the error rate change.
+
+
+## PID controller tuning
+In order to obtain a relatively stable system, we started by tuning the controller manually. At first we set the value of the integral gain to zero and used a 1:10 ratio between the proportional and derivative terms. We then adjusted the proportional gain to make the system more responsive. Then tried several values for the derivative term following a twiddle like approach. We started with by incresing the term by a relatively large value and then decreased/increased by smaller amounts. Then, once we settled with satisfactory values for the P and D gains, the integral gain was set to some really small value and increased gradually. The speed of the vehicule at specific set points around the track (bridge start, bridge exit, etc) was used as a means if assessing the effect of a gain change.
+
+##Controller implementation
+The total error, as a result of the controller function application, was calculated with `PID::TotalError()`. The individual errors terms were calculated within `PID::UpdateError()`. 
 
 ---
 
