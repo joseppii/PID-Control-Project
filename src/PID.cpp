@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 /**
- * TODO: Complete the PID class. You may add any additional desired functions.
+ * PID class. 
  */
 
 PID::PID() {}
@@ -11,7 +11,7 @@ PID::~PID() {}
 
 void PID::Init(double Kp_, double Ki_, double Kd_) {
   /**
-   * TODO: Initialize PID coefficients (and errors, if needed)
+   * Initialize PID coefficients (and errors, if needed)
    */
   Kp = Kp_;
   Ki = Ki_;
@@ -25,7 +25,7 @@ void PID::Init(double Kp_, double Ki_, double Kd_) {
 
 void PID::UpdateError(double cte) {
   /**
-   * TODO: Update PID errors based on cte.
+   * Update PID errors based on cte.
    */
   i_error +=cte;
   d_error = cte-p_error;
@@ -34,10 +34,9 @@ void PID::UpdateError(double cte) {
 
 double PID::TotalError() {
   /**
-   * TODO: Calculate and return the total error
+   * Calculate and return the total error
    */
   float total_err;
-  cout << "p_error" <<Kp*p_error << endl;
   total_err = -Kp*p_error - Ki*i_error - Kd*d_error;
   return total_err;  // TODO: Add your total error calc here!
 }
